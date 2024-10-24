@@ -1,18 +1,21 @@
 <header>
-    <h3>Contatos</h3>
+    <h3 class="mt-2"><i class="bi bi-person-badge-fill"></i> Contatos</h3>
 </header>
 <div>
-    <a href="index.php?menuop=cad-contato">Novo contato</a>
+    <a class="btn btn-outline-secondary mb-2"href="index.php?menuop=cad-contato"><i class="bi bi-person-fill-add"></i> Novo contato</a>
 </div>
 
 <div>
     <form action="index.php?menuop=contatos" method="post">
-        <input type="text" name="txtPesquisa" id="txtPesquisa">
-        <input type="submit" value="Pesquisar">
+        <div class="input-group">
+            <input class="form-control"type="text" name="txtPesquisa" id="txtPesquisa">
+            <button class="btn btn-success btn-sm mb-1"  type="submit"><i class="bi bi-search"></i> Pesquisar</button>
+        </div>
     </form>
 </div>
+<div class="tabela">
+<table class="table table-dark table-hover table-bordered table-sm text-nowrap">
 
-<table border="1">
     <thead>
         <tr>
             <th>ID </th>
@@ -62,7 +65,7 @@ LIMIT $inicio, $quantidade
         while($dados = mysqli_fetch_assoc($rs)) {
             
         ?>
-        <tr>
+        <tr class="text-nowrap">
             <td><?=$dados["idContato"]?></td>
             <td><?=$dados["nomeContato"]?></td>
             <td><?=$dados["emailContato"]?></td>
@@ -71,25 +74,31 @@ LIMIT $inicio, $quantidade
             <td><?=$dados["sexoContato"]?></td>
             <td><?=$dados["dataNasciContato"]?></td>
             <td><?=$dados["flagFavorito"]?></td>
-            <td><a href="index.php?menuop=editar-contato&idContato=<?=$dados["idContato"]?>">Editar</a></td>
-            <td><a href="index.php?menuop=excluir-contato&idContato=<?=$dados["idContato"]?>">Excluir</a></td>
+        <td class="text-center">
+            <a class="btn btn-outline-warning btn-sm" href="index.php?menuop=editar-contato&idContato=<?=$dados["idContato"]?>">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+        </td class="text-center">
+            <td><a class="btn btn-outline-danger btn-sm" href="index.php?menuop=excluir-contato&idContato=<?=$dados["idContato"]?>"><i class="bi bi-trash"></i></a></td>
         <?php
 
         }
 ?>
     </tbody>
-    <br>
+    <ul class="pagination justify-content-center">
+
         <?php
         $sqlTotal = "SELECT idContato FROM tbcontatos";
         $qrTotal = mysqli_query($conexao, $sqlTotal) or die(mysqli_error($conexao));
         $numTotal = mysqli_num_rows($qrTotal);
         $totalPagina = ceil($numTotal / $quantidade);
-        echo "Total de Registros: $numTotal <br>";
-        echo '<a href="?menuop=contatos&pagina=1">Primeira Página</a>';
+        // corrigir problema do mouse pointer
+        echo "<li class='page-item'><span class='page-link'>Total de Registros: " . $numTotal . " </span></li>";
+        echo '<li class="page-item"><a class="page-link" href="?menuop=contatos&pagina=1">Primeira Página</a></li>';
 
         if($pagina > 2) {
             ?>
-           <a href="?menuop=contatos&pagina=<?php echo $pagina- 1?>"> << </a>
+           <li class="page-link"><a href="?menuop=contatos&pagina=<?php echo $pagina- 1?>"> << </a></li>
             <?php
         }
 
@@ -97,9 +106,9 @@ LIMIT $inicio, $quantidade
 
             if($i>=($pagina-3) && $i <= ($pagina+3)){
                 if($i==$pagina){
-                    echo $i;
+                    echo "<li class='page-item active'><a class='page-link'>$i</a></li>";
                 } else {
-                    echo "<a href=\"?menuop=contatos&pagina=$i\">$i</a>";
+                    echo "<li class='page-item'><a class='page-link' href=\"?menuop=contatos&pagina=$i\">$i</a></li>";
                 }
             }
 
@@ -107,13 +116,14 @@ LIMIT $inicio, $quantidade
 
         if($pagina < ($totalPagina - 1)) {
             ?>
-           <a href="?menuop=contatos&pagina=<?php echo $pagina + 1?>"> >> </a>
+           <li class="page-link"><a href="?menuop=contatos&pagina=<?php echo $pagina + 1?>"> >> </a></li>
             <?php
         }
 
-
-        echo "<a href=\"?menuop=contatos&pagina=$totalPagina\">Última Página</a>";
+        echo "<li class='page-item'><a class='page-link'href=\"?menuop=contatos&pagina=$totalPagina\">Última Página</a></li>";
 
 
         ?>
+    </ul>
 </table>
+    </div>

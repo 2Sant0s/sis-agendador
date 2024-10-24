@@ -1,1 +1,1 @@
-<h3>Eventos</h3>
+<h3 class="mt-2"><i class="bi bi-calendar-check-fill"></i> Eventos</h3>

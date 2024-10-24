@@ -1,1 +1,1 @@
-<h3>Tarefas</h3>
+<h3 class="mt-2"><i class="bi bi-check2-square"></i> Tarefas</h3>

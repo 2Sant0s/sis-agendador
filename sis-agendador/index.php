@@ -43,60 +43,73 @@ include("db/conexao.php");
 
             switch ($menuop) {
                 case 'home':
-                    include("paginas/home/home.php");
+                    include("./paginas/home/home.php");
                     break;
 
                 case 'contatos':
-                    include("paginas/contatos/contatos.php");
+                    include("./paginas/contatos/contatos.php");
                     break;
 
                 case 'cad-contato':
-                    include("paginas/contatos/cad-contato.php");
+                    include("./paginas/contatos/cad-contato.php");
                     break;
 
                 case 'inserir-contato':
-                    include("paginas/contatos/inserir-contato.php");
+                    include("./paginas/contatos/inserir-contato.php");
                     break;
 
                 case 'editar-contato':
-                    include("paginas/contatos/editar-contato.php");
+                    include("./paginas/contatos/editar-contato.php");
                     break;
 
                 case 'atualizar-contato':
-                    include("paginas/contatos/atualizar-contato.php");
+                    include("./paginas/contatos/atualizar-contato.php");
                     break;
 
                 case 'excluir-contato':
-                    include("paginas/contatos/excluir-contato.php");
+                    include("./paginas/contatos/excluir-contato.php");
                     break;
 
                 case 'tarefas':
-                    include("paginas/tarefas/tarefas.php");
+                    include("./paginas/tarefas/tarefas.php");
+                    break;
+                    
+                case 'cad-tarefa':
+                    include("./paginas/tarefas/cad-tarefa.php");
                     break;
 
+                case 'inserir-tarefa':
+                    include("./paginas/tarefas/inserir-tarefa.php");
+                    break;
+                    
                 case 'eventos':
-                    include("paginas/eventos/eventos.php");
+                    include("./paginas/eventos/eventos.php");
                     break;
 
 
                 default:
-                    include("paginas/home/home.php");
+                    include("./paginas/home/home.php");
                     break;
             }
 
             ?>
         </div>
-        <footer class="container-fluid fixed-bottom bg-dark">
-
-            <div class="text-center">SIS Agendador V 1.0</div>
         </main>
+        <footer class="container-fluid fixed-bottom bg-dark">
+            <div class="text-center">SIS Agendador V 1.0</div>
         </footer>
         <script src="./js/jquery.js"></script>
         <script src="./js/jquery.form.js"></script>
         <script src="./js/upload.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="js/validation.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+<script src="./js/validation.js"></script>
+<script src="./js/javascript-agendador.js"></script>
 </body>
 
 </html>

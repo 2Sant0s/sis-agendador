@@ -2,7 +2,7 @@
 // recuperando id do usuário
 $idContato = $_GET["idContato"];
 
-$sql = "SELECT * FROM tbcontatos WHERE idContato = {$idContato}";
+$sql = "SELECT * FROM tbcontatos WHERE idContato = '{$idContato}'";
 $rs = mysqli_query($conexao, $sql) or die("Erro ao recuperar os dados do registro" . mysqli_error($conexao));
 $dados = mysqli_fetch_assoc($rs);
 ?>
@@ -93,16 +93,15 @@ $dados = mysqli_fetch_assoc($rs);
 </div>
 <div class="col-6">
     <?php
-
-    if($dados["nomeFotoContato"] == "" || !file_exists('./paginas/contatos/fotos-contatos/'. $dados["nomeFotoContato"])) {
-        $nomeFotoContato = "SemFoto.jpg";
+    if($dados["nomeFotoContato"]== "" || !file_exists('./paginas/contatos/fotos-contatos/'. $dados["nomeFotoContato"])) {
+        $nomeFoto = "SemFoto.jpg";
     } else {
-        $nomeFotoContato = $dados["nomeFotoContato"];
+        $nomeFoto = $dados["nomeFotoContato"];
     }
 
     ?>
     <div class="mb-3">
-        <img class="img-fluid img-thumbnail" width="400" src="./paginas/contatos/fotos-contatos/<?=$nomeFotoContato?>" alt="Foto do Contato">
+        <img id="foto-contato" class="img-fluid img-thumbnail" width="400" src="./paginas/contatos/fotos-contatos/<?=$nomeFoto?>" alt="Foto do Contato">
     </div>
     <button class="btn btn-info" id="btn-editar-foto">
         <i class="bi bi-camera-fill"></i> Editar Foto
@@ -116,11 +115,11 @@ $dados = mysqli_fetch_assoc($rs);
                         <input id="btn-enviar-foto" class="btn btn-secondary" type="submit" value="Enviar">
                     </div>
             </form>
-            <div id="mensagem" class="mb alert alert-success">
+            <div id="mensagem" class="mb-3 alert alert-success">
                 Mensagem aqui.
             </div>
             <div id="preloader"class="progress">
-                <div id="barra" class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div id="barra" class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
             </div>
     </div>
                

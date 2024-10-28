@@ -1,3 +1,8 @@
+<?php
+// variavel da pesquisa
+$txtPesquisa = (isset($_POST["txtPesquisa"]))?$_POST["txtPesquisa"]:"";
+?>
+
 <header>
     <h3 class="mt-2"><i class="bi bi-person-badge-fill"></i> Contatos</h3>
 </header>
@@ -8,7 +13,7 @@
 <div>
     <form action="index.php?menuop=contatos" method="post">
         <div class="input-group">
-            <input class="form-control"type="text" name="txtPesquisa" id="txtPesquisa">
+            <input class="form-control"type="text" name="txtPesquisa" id="txtPesquisa" value="<?=$txtPesquisa?>">
             <button class="btn btn-success btn-sm mb-1"  type="submit"><i class="bi bi-search"></i> Pesquisar</button>
         </div>
     </form>
@@ -18,6 +23,7 @@
 
     <thead>
         <tr>
+            <th><i class="bi bi-star-fill"></i></th>
             <th>ID </th>
             <th>Nome</th>
             <th>Email</th>
@@ -38,7 +44,7 @@
                     //(10 * 2) - 10 = 10
                     // 1 - 2 - 3 - 4  
 
-    $txtPesquisa = (isset($_POST["txtPesquisa"]))?$_POST["txtPesquisa"]:"";
+    
 
         $sql = "SELECT idContato,
 upper (nomeContato) AS nomeContato,
@@ -53,12 +59,12 @@ ELSE
 END AS sexoContato,
 telefoneContato,
 DATE_FORMAT(dataNasciContato, '%d/%m/%Y') AS dataNasciContato,
-flagFavorito 
+flagFavorito
 FROM tbContatos
 WHERE
 idContato = '{$txtPesquisa}' OR
 nomeContato LIKE '%{$txtPesquisa}%'
-ORDER BY nomeContato ASC
+ORDER BY flagFavorito DESC, nomeContato ASC
 LIMIT $inicio, $quantidade
  ";
         $rs = mysqli_query($conexao, $sql) or die ("Erro ao executar a consulta" . mysqli_error($conexao));
@@ -66,6 +72,23 @@ LIMIT $inicio, $quantidade
             
         ?>
         <tr class="text-nowrap">
+            <td>
+                <?php
+            if($dados["flagFavorito"]==1) {
+                echo "<a href=\"#\" class=\"flagFavorito link-warning\" title=\"Favorito\"id=\"{$dados["idContato"]}\">
+                <i class=\"bi bi-star-fill\"></i>
+                </a>";
+                
+                } else {
+                    echo "<a href=\"#\" class=\"flagFavorito link-warning\" title=\"Não Favorito\"id=\"{$dados["idContato"]}\">
+                    <i class=\"bi bi-star\"></i>
+                    </a>";
+                
+            }
+
+            ?>
+
+            </td>
             <td><?=$dados["idContato"]?></td>
             <td><?=$dados["nomeContato"]?></td>
             <td><?=$dados["emailContato"]?></td>

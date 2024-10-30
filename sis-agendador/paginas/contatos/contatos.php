@@ -4,23 +4,22 @@ $txtPesquisa = (isset($_POST["txtPesquisa"]))?$_POST["txtPesquisa"]:"";
 ?>
 
 <header>
-    <h3 class="mt-2"><i class="bi bi-person-badge-fill"></i> Contatos</h3>
+    <h3 class="mt-2 text-primary"><i class="bi bi-person-badge-fill"></i> Contatos</h3>
 </header>
 <div>
-    <a class="btn btn-outline-secondary mb-2"href="index.php?menuop=cad-contato"><i class="bi bi-person-fill-add"></i> Novo contato</a>
+    <a title="Cadastrar Contato" class="btn btn-secondary mt-2" href="index.php?menuop=cad-contato"><i class="bi bi-person-badge-fill"></i> Cadastrar Contato</a>
+    
 </div>
 
 <div>
-    <form action="index.php?menuop=contatos" method="post">
+    <form class="mt-3 mb-3" action="index.php?menuop=contatos" method="post">
         <div class="input-group">
-            <input class="form-control"type="text" name="txtPesquisa" id="txtPesquisa" value="<?=$txtPesquisa?>">
-            <button class="btn btn-success btn-sm mb-1"  type="submit"><i class="bi bi-search"></i> Pesquisar</button>
+            <input placeholder="Digite um nome ou ID para buscar" class="form-control "type="text" name="txtPesquisa" id="txtPesquisa" value="<?=$txtPesquisa?>">
+            <button title="Pesquisar Contato" class="btn btn-primary btn-sm"  type="submit"><i class="bi bi-search"></i> Pesquisar</button>
         </div>
     </form>
 </div>
-<div class="tabela">
 <table class="table table-dark table-hover table-bordered table-sm text-nowrap">
-
     <thead>
         <tr>
             <th><i class="bi bi-star-fill"></i></th>
@@ -31,9 +30,8 @@ $txtPesquisa = (isset($_POST["txtPesquisa"]))?$_POST["txtPesquisa"]:"";
             <th>Endereço</th>
             <th>Sexo</th>
             <th>Data de Nascimento</th>
-            <th>Flag</th>
-            <th>Edição</th>
-            <th>Excluir</th>
+            <th>Atualizar</th>
+            <th>Deletar</th>
         </tr>
     </thead>
     <tbody>
@@ -89,25 +87,27 @@ LIMIT $inicio, $quantidade
             ?>
 
             </td>
-            <td><?=$dados["idContato"]?></td>
+            <td class><?=$dados["idContato"]?></td>
             <td><?=$dados["nomeContato"]?></td>
             <td><?=$dados["emailContato"]?></td>
             <td><?=$dados["telefoneContato"]?></td>
             <td><?=$dados["enderecoContato"]?></td>
             <td><?=$dados["sexoContato"]?></td>
             <td><?=$dados["dataNasciContato"]?></td>
-            <td><?=$dados["flagFavorito"]?></td>
         <td class="text-center">
             <a class="btn btn-outline-warning btn-sm" href="index.php?menuop=editar-contato&idContato=<?=$dados["idContato"]?>">
-                <i class="bi bi-pencil-square"></i>
+                <i title="Atualizar Contato" class="bi bi-pencil-square"></i>
             </a>
         </td class="text-center">
-            <td><a class="btn btn-outline-danger btn-sm" href="index.php?menuop=excluir-contato&idContato=<?=$dados["idContato"]?>"><i class="bi bi-trash"></i></a></td>
+            <td><a class="btn btn-outline-danger btn-sm" href="index.php?menuop=excluir-contato&idContato=<?=$dados["idContato"]?>"><i title="Deletar Contato" class="bi bi-trash"></i></a></td>
         <?php
 
         }
 ?>
     </tbody>
+    
+</table>
+    </div>
     <ul class="pagination justify-content-center">
 
         <?php
@@ -116,12 +116,12 @@ LIMIT $inicio, $quantidade
         $numTotal = mysqli_num_rows($qrTotal);
         $totalPagina = ceil($numTotal / $quantidade);
         // corrigir problema do mouse pointer
-        echo "<li class='page-item'><span class='page-link'>Total de Registros: " . $numTotal . " </span></li>";
-        echo '<li class="page-item"><a class="page-link" href="?menuop=contatos&pagina=1">Primeira Página</a></li>';
+        echo "<li class='page-item mt-3'><span class='page-link'><b>Total de Contatos:</b> " . $numTotal . " </span></li>";
+        echo '<li class="page-item mt-3"><a class="page-link" href="?menuop=contatos&pagina=1">Primeira Página</a></li>';
 
         if($pagina > 2) {
             ?>
-           <li class="page-link"><a href="?menuop=contatos&pagina=<?php echo $pagina- 1?>"> << </a></li>
+           <li class="page-link mt-3"><a href="?menuop=contatos&pagina=<?php echo $pagina- 1?>"> << </a></li>
             <?php
         }
 
@@ -129,9 +129,9 @@ LIMIT $inicio, $quantidade
 
             if($i>=($pagina-3) && $i <= ($pagina+3)){
                 if($i==$pagina){
-                    echo "<li class='page-item active'><a class='page-link'>$i</a></li>";
+                    echo "<li class='page-item mt-3 active'><a class='page-link'>$i</a></li>";
                 } else {
-                    echo "<li class='page-item'><a class='page-link' href=\"?menuop=contatos&pagina=$i\">$i</a></li>";
+                    echo "<li class='page-item mt-3'><a class='page-link' href=\"?menuop=contatos&pagina=$i\">$i</a></li>";
                 }
             }
 
@@ -139,14 +139,12 @@ LIMIT $inicio, $quantidade
 
         if($pagina < ($totalPagina - 1)) {
             ?>
-           <li class="page-link"><a href="?menuop=contatos&pagina=<?php echo $pagina + 1?>"> >> </a></li>
+           <li class="page-link mt-3"><a href="?menuop=contatos&pagina=<?php echo $pagina + 1?>"> >> </a></li>
             <?php
         }
 
-        echo "<li class='page-item'><a class='page-link'href=\"?menuop=contatos&pagina=$totalPagina\">Última Página</a></li>";
+        echo "<li class='page-item'><a class='page-link mt-3'href=\"?menuop=contatos&pagina=$totalPagina\">Última Página</a></li>";
 
 
         ?>
     </ul>
-</table>
-    </div>

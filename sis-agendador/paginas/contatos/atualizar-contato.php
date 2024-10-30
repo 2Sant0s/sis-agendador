@@ -1,7 +1,3 @@
-<header>
-    <h3>Atualizar Contato</h3>
-</header>
-
 <?php
 $idContato = mysqli_real_escape_string($conexao, $_POST["idContato"]);
 $nomeContato = mysqli_real_escape_string($conexao, $_POST["nomeContato"]);
@@ -23,5 +19,12 @@ $sql = "UPDATE tbcontatos SET
 // verificação se os dados foram inseridos corretamente
 $rs = mysqli_query($conexao, $sql) or die("Erro ao executar a atualização" . mysqli_error($conexao));
 
-echo "O registro foi atualizado com sucesso!";
 ?>
+
+<div class="alert alert-warning mt-4" role="alert">
+    <h4 class="alert-heading"></h4>
+  <p><b>Contato atualizado com sucesso.</b></p>
+  <hr>
+  <p class="mb-0">
+    <a href="?menuop=contatos">Voltar para a lista de contatos</a>
+</div>

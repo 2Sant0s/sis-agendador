@@ -1,14 +1,16 @@
-<header>
-    <h3>Excluir Contato</h3>
-</header>
-
 <?php
 
 $idContato = mysqli_real_escape_string($conexao, $_GET["idContato"]);
 $sql = "DELETE FROM tbcontatos WHERE idContato = '{$idContato}'";
 
-mysqli_query($conexao, $sql) or die ("Erro ao excluir o registro" . mysqli_error($conexao));
-
-echo "Registro excluido com sucesso!";
+mysqli_query($conexao, $sql) or die ("Erro ao excluir o contato" . mysqli_error($conexao));
 
 ?>
+
+<div class="alert alert-danger mt-4" role="alert">
+    <h4 class="alert-heading"></h4>
+  <p><b>Contato deletado com sucesso.</b></p>
+  <hr>
+  <p class="mb-0">
+    <a href="?menuop=contatos">Voltar para a lista de contatos</a>
+</div>
